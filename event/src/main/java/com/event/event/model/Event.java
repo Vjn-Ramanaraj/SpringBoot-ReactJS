@@ -1,5 +1,7 @@
 package com.event.event.model;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +27,14 @@ public class Event {
     private long id;
     @Column(name="event_name")
     private String Eventname;
-    @Column(name = "event_price")
-    private Integer price;
+    @Column(name = "event_description")
+    private String Description;
+    @Column(name="event_date")
+    private String Date;
+    @Column(name="event_location")
+    private String Location;
+    @Column(name="event_attendees")
+    private String Attendees;
     
     
 }

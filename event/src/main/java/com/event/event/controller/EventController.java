@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+ //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.event.event.exception.ResourceNotFoundException;
@@ -52,7 +53,11 @@ public class EventController {
         Event updateEvent =eventRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Event not Exists with id :"+id));
           
         updateEvent.setEventname(eventDetails.getEventname());
-        updateEvent.setPrice(eventDetails.getPrice());
+        updateEvent.setDescription(eventDetails.getDescription());
+        updateEvent.setDate(eventDetails.getDate());
+        updateEvent.setLocation(eventDetails.getLocation());
+        updateEvent.setAttendees(eventDetails.getAttendees());
+
 
          eventRepository.save(updateEvent);
          return ResponseEntity.ok(updateEvent);
@@ -70,4 +75,26 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
+
+      // Filter events by price range
+  // @GetMapping("/filter")
+  // public List<Event> getEventsByPriceRange(
+  //         @RequestParam(required = false) Integer minPrice,
+  //         @RequestParam(required = false) Integer maxPrice) {
+
+  //   if (minPrice == null && maxPrice == null) {
+  //     // If both minPrice and maxPrice are not provided, return all events
+  //     return eventRepository.findAll();
+  //   } else if (minPrice == null) {
+  //     // If only maxPrice is provided, filter events with price less than or equal to maxPrice
+  //     return eventRepository.findByPriceLessThanEqual(maxPrice);
+  //   } else if (maxPrice == null) {
+  //     // If only minPrice is provided, filter events with price greater than or equal to minPrice
+  //     return eventRepository.findByPriceGreaterThanEqual(minPrice);
+  //   } else {
+  //     // If both minPrice and maxPrice are provided, filter events within the specified price range
+  //     return eventRepository.findByPriceBetween(minPrice, maxPrice);
+  //   }
+  // }
+
 }
